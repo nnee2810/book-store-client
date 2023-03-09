@@ -9,7 +9,7 @@ import { takePerPage } from "configs/constants"
 import useQueryParams from "hooks/useQueryParams"
 import debounce from "lodash.debounce"
 import moment from "moment"
-import { ChangeEvent, useCallback, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai"
 import { MdMoreHoriz } from "react-icons/md"
 import ModalCreateProduct from "../components/ModalCreateProduct"
@@ -28,14 +28,11 @@ export default function Products() {
   const [viewId, setViewId] = useState<string | undefined>()
   const [deleteId, setDeleteId] = useState<string | undefined>()
 
-  const handleChangeSearch = useCallback(
-    debounce((e: ChangeEvent<HTMLInputElement>) => {
-      updateQueryParams({
-        name: e.target.value,
-      })
-    }, 300),
-    [updateQueryParams],
-  )
+  const handleChangeSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
+    updateQueryParams({
+      name: e.target.value,
+    })
+  }, 300)
 
   return (
     <div>
@@ -82,13 +79,13 @@ export default function Products() {
                   >
                     <MenuItem
                       icon={<AiOutlineEye />}
-                      onClick={() => setViewId(item.id)}
+                      onClick={setViewId.bind(null, item.id)}
                     >
                       Chi tiết
                     </MenuItem>
                     <MenuItem
                       icon={<AiOutlineDelete />}
-                      onClick={() => setDeleteId(item.id)}
+                      onClick={setDeleteId.bind(null, item.id)}
                     >
                       Xóa
                     </MenuItem>
@@ -116,12 +113,12 @@ export default function Products() {
       <ModalViewProduct
         id={viewId}
         visible={!!viewId}
-        onClose={() => setViewId(undefined)}
+        onClose={setViewId.bind(null, undefined)}
       />
       <ModalDeleteProduct
         id={deleteId}
         visible={!!deleteId}
-        onClose={() => setDeleteId(undefined)}
+        onClose={setDeleteId.bind(null, undefined)}
       />
     </div>
   )

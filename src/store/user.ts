@@ -1,30 +1,30 @@
 import { UserEntity } from "entities/user.entity"
 import { create } from "zustand"
 
-export enum AuthState {
+export enum AuthStatus {
   LOADING,
   SUCCESS,
   FAIL,
 }
 
 interface UserState {
-  state: AuthState
+  status: AuthStatus
   user: UserEntity | null
   setUser(user: UserEntity): void
   clearUser(): void
 }
 
 export const useUserStore = create<UserState>((set) => ({
-  state: AuthState.LOADING,
+  status: AuthStatus.LOADING,
   user: null,
   setUser: (user: UserEntity) =>
     set({
-      state: AuthState.SUCCESS,
+      status: AuthStatus.SUCCESS,
       user,
     }),
   clearUser: () =>
     set({
-      state: AuthState.FAIL,
+      status: AuthStatus.FAIL,
       user: null,
     }),
 }))

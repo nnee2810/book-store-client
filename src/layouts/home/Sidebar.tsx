@@ -1,10 +1,13 @@
 import clsx from "clsx"
+import useAuth from "modules/auth/hooks/useAuth"
 import { ReactNode } from "react"
 import {
   AiOutlineBook,
   AiOutlineFileText,
+  AiOutlinePieChart,
   AiOutlineUsergroupAdd,
 } from "react-icons/ai"
+import { MdOutlineLogout } from "react-icons/md"
 import { Link, useLocation } from "react-router-dom"
 
 const items: { name: string; href: string; icon: ReactNode }[] = [
@@ -23,10 +26,16 @@ const items: { name: string; href: string; icon: ReactNode }[] = [
     href: "/orders",
     icon: <AiOutlineFileText />,
   },
+  {
+    name: "Thống kê",
+    href: "/stats",
+    icon: <AiOutlinePieChart />,
+  },
 ]
 
 export default function Sidebar() {
   const location = useLocation()
+  const { signOut } = useAuth()
 
   return (
     <div className="flex flex-col justify-center">
@@ -46,6 +55,18 @@ export default function Sidebar() {
           </div>
         </Link>
       ))}
+      <div
+        className={clsx(
+          "px-8 py-4 flex items-center gap-8 text-red-500 transition-all cursor-pointer",
+          "hover:bg-gray-100",
+        )}
+        onClick={signOut}
+      >
+        <div className="text-2xl">
+          <MdOutlineLogout />
+        </div>
+        <div className="text-lg font-medium">Đăng xuất</div>
+      </div>
     </div>
   )
 }

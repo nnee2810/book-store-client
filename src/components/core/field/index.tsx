@@ -1,3 +1,4 @@
+import { getFieldError } from "helpers/getFieldError"
 import { Controller, useFormContext } from "react-hook-form"
 import Select, { SelectProps } from "./Select"
 import TextInput, { TextInputProps } from "./TextInput"
@@ -25,18 +26,26 @@ export default function Field(props: FieldProps) {
         render={({ field: { ref, ...restField } }) => (
           <>
             {variant === "text" && (
-              <TextInput isInvalid={!!errors[name]} {...props} {...restField} />
+              <TextInput
+                isInvalid={!!getFieldError(errors, props.name)}
+                {...props}
+                {...restField}
+              />
             )}
             {variant === "select" && (
-              <Select isInvalid={!!errors[name]} {...props} {...restField} />
+              <Select
+                isInvalid={!!getFieldError(errors, props.name)}
+                {...props}
+                {...restField}
+              />
             )}
           </>
         )}
       />
 
-      {errors[name] && (
+      {!!getFieldError(errors, props.name) && (
         <div className="text-xs text-red-500">
-          {String(errors[name]?.message)}
+          {getFieldError(errors, props.name)}
         </div>
       )}
     </div>

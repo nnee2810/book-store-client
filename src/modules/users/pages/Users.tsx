@@ -10,7 +10,7 @@ import { UserRole } from "entities/user.entity"
 import useQueryParams from "hooks/useQueryParams"
 import debounce from "lodash.debounce"
 import moment from "moment"
-import { ChangeEvent, useCallback, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai"
 import { MdMoreHoriz } from "react-icons/md"
 import ModalCreateUser from "../components/ModalCreateUser"
@@ -29,14 +29,11 @@ export default function Users() {
   const [viewId, setViewId] = useState<string | undefined>()
   const [deleteId, setDeleteId] = useState<string | undefined>()
 
-  const handleChangeSearch = useCallback(
-    debounce((e: ChangeEvent<HTMLInputElement>) => {
-      updateQueryParams({
-        name: e.target.value,
-      })
-    }, 300),
-    [updateQueryParams],
-  )
+  const handleChangeSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
+    updateQueryParams({
+      name: e.target.value,
+    })
+  }, 300)
 
   return (
     <div>
@@ -77,7 +74,7 @@ export default function Users() {
                 <td>{item.phone}</td>
                 <td>{item.address}</td>
                 <td>
-                  {item.role === UserRole.ADMIN && "Quản trị viên"}{" "}
+                  {item.role === UserRole.ADMIN && "Quản trị viên"}
                   {item.role === UserRole.EMPLOYEE && "Nhân viên"}
                 </td>
                 <td>{moment(item.createdAt).format("DD/MM/YYYY HH:mm")}</td>
@@ -93,13 +90,13 @@ export default function Users() {
                   >
                     <MenuItem
                       icon={<AiOutlineEye />}
-                      onClick={() => setViewId(item.id)}
+                      onClick={setViewId.bind(null, item.id)}
                     >
                       Chi tiết
                     </MenuItem>
                     <MenuItem
                       icon={<AiOutlineDelete />}
-                      onClick={() => setDeleteId(item.id)}
+                      onClick={setDeleteId.bind(null, item.id)}
                     >
                       Xóa
                     </MenuItem>
@@ -124,12 +121,12 @@ export default function Users() {
       <ModalViewUser
         id={viewId}
         visible={!!viewId}
-        onClose={() => setViewId(undefined)}
+        onClose={setViewId.bind(null, undefined)}
       />
       <ModalDeleteUser
         id={deleteId}
         visible={!!deleteId}
-        onClose={() => setDeleteId(undefined)}
+        onClose={setDeleteId.bind(null, undefined)}
       />
     </div>
   )

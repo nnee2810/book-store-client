@@ -9,8 +9,9 @@ export interface ModalBaseProps {
 
 interface ModalProps extends ModalBaseProps {
   name: string
-  disabled?: boolean
   actions?: ReactNode
+  disabled?: boolean
+  className?: string
 }
 export default function Modal({
   visible,
@@ -18,6 +19,7 @@ export default function Modal({
   name,
   actions,
   disabled,
+  className,
   children,
 }: PropsWithChildren<ModalProps>) {
   return (
@@ -26,7 +28,7 @@ export default function Modal({
         "visible opacity-100 pointer-events-auto": visible,
       })}
     >
-      <div className="modal-box">
+      <div className={clsx("modal-box", className)}>
         <div className="text-xl font-medium">{name}</div>
         <div className="py-4">{children}</div>
         <div className="flex justify-end gap-2">

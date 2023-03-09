@@ -20,7 +20,7 @@ export default function Pagination({
               "btn",
               props.currentPage === item ? "btn-primary" : "btn-ghost",
             )}
-            onClick={() => onPageChange?.(item)}
+            onClick={onPageChange?.bind(null, item)}
             key={item}
           >
             {item}
