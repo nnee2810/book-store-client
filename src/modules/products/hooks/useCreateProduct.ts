@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast"
 import * as yup from "yup"
 import { CreateProductDto } from "../dto/create-product.dto"
 
-const formSchema: yup.Schema<CreateProductDto> = yup.object().shape({
+const formSchema: yup.SchemaOf<CreateProductDto> = yup.object().shape({
   name: yup
     .string()
     .label("Tên")

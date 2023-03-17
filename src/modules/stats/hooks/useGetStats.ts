@@ -10,7 +10,7 @@ import * as yup from "yup"
 import { GetStatsDto } from "../dto/get-stats.dto"
 import { StatsTimeMode } from "../interfaces/stats.interface"
 
-const formSchema: yup.Schema<GetStatsDto> = yup.object().shape({
+const formSchema: yup.SchemaOf<GetStatsDto> = yup.object().shape({
   timeMode: yup
     .string()
     .label("Thống kê theo")

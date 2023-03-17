@@ -38,7 +38,10 @@ export default function ModalViewProduct({
     }
   }, [props.visible])
   useEffect(() => {
-    if (data) methods.reset(data)
+    if (data) {
+      const { createdAt, updatedAt, ...restData } = data
+      methods.reset(restData)
+    }
   }, [data])
 
   return (

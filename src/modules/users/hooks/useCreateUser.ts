@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast"
 import * as yup from "yup"
 import { CreateUserDto } from "../dto/create-user.dto"
 
-const formSchema: yup.Schema<CreateUserDto> = yup.object().shape({
+const formSchema: yup.SchemaOf<CreateUserDto> = yup.object().shape({
   name: yup
     .string()
     .label("Họ tên")

@@ -27,7 +27,7 @@
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.8.1",
     "vite-tsconfig-paths": "^4.0.5",
-    "yup": "^1.0.0",
+    "yup": "0.32.11",
     "zustand": "^4.3.5"
   },
   "devDependencies": {

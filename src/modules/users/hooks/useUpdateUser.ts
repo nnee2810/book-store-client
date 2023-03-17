@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast"
 import * as yup from "yup"
 import { UpdateUserDto } from "../dto/update-user.dto"
 
-const formSchema: yup.Schema<UpdateUserDto> = yup.object().shape({
+const formSchema: yup.SchemaOf<UpdateUserDto> = yup.object().shape({
   id: yup.string().required(),
   name: yup
     .string()

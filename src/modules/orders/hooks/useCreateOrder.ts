@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast"
 import * as yup from "yup"
 import { CreateOrderDto } from "../dto/create-order.dto"
 
-const formSchema: yup.Schema<CreateOrderDto> = yup.object().shape({
+const formSchema: yup.SchemaOf<CreateOrderDto> = yup.object().shape({
   type: yup
     .string()
     .label("Loại đơn hàng")
@@ -20,6 +20,7 @@ const formSchema: yup.Schema<CreateOrderDto> = yup.object().shape({
     .of(
       yup.object().shape({
         productId: yup.string().required(),
+        productName: yup.string(),
         quantity: yup
           .number()
           .label("Số lượng")

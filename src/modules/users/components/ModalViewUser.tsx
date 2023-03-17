@@ -36,7 +36,10 @@ export default function ModalViewUser({ id, ...props }: ModalViewUserProps) {
     }
   }, [props.visible])
   useEffect(() => {
-    if (data) methods.reset(data)
+    if (data) {
+      const { id, createdAt, updatedAt, ...restData } = data
+      methods.reset(restData)
+    }
   }, [data])
 
   return (

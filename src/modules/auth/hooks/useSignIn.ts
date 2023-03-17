@@ -9,7 +9,7 @@ import { useUserStore } from "store/user"
 import * as yup from "yup"
 import { SignInResult } from "../interfaces/sign-in-result.interface"
 
-const formSchema: yup.Schema<SignInDto> = yup.object().shape({
+const formSchema: yup.SchemaOf<SignInDto> = yup.object().shape({
   username: yup.string().label("Tên đăng nhập").required(requiredMessage),
   password: yup.string().label("Mật khẩu").required(requiredMessage),
 })

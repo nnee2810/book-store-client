@@ -21,7 +21,7 @@ export default function ButtonGroup<T = unknown>({
 
   return (
     <div className="btn-group">
-      {options.map((item) => (
+      {options.map((item, idx) => (
         <Button
           colorScheme={colorScheme}
           outline={item.value !== selected?.value}
@@ -29,6 +29,7 @@ export default function ButtonGroup<T = unknown>({
             null,
             item.value === selected?.value ? undefined : item,
           )}
+          key={idx}
         >
           {item.label}
         </Button>
